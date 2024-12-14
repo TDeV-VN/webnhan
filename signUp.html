@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1-crypto-js.js"></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đăng ký</title>
@@ -72,6 +74,11 @@
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
+        // Hash mật khẩu trước khi gửi
+        const hashedPassword = CryptoJS.SHA256(password).toString(
+          CryptoJS.enc.Base64
+        );
+
         try {
           const response = await fetch(
             "https://fastapinhan.onrender.com/register",
@@ -83,7 +90,7 @@
               body: JSON.stringify({
                 displayname,
                 username,
-                password,
+                password: hashedPassword, // Gửi mật khẩu đã được hash
               }),
             }
           );
