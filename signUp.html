@@ -73,17 +73,20 @@
         const password = document.getElementById("password").value;
 
         try {
-          const response = await fetch("http://127.0.0.1:8000/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              displayname,
-              username,
-              password,
-            }),
-          });
+          const response = await fetch(
+            "https://fastapinhan.onrender.com/register",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                displayname,
+                username,
+                password,
+              }),
+            }
+          );
 
           const result = await response.json();
           if (response.ok) {
